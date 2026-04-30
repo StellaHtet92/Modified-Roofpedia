@@ -47,13 +47,15 @@ Before prediction, run the slope computation and filtering process in QGIS to:
 
 ### 2. Data Preparation
 
-**Satellite tiles:** Prepare slippy map tiles at zoom level 19 and place them in `results/02Images/<CityName>/`.
+**Satellite tiles:** Download [SwissImage](https://www.swisstopo.admin.ch/en/orthoimage-swissimage-10#Download) of your study region. Prepare map tiles at zoom level 19 by using QGIS>Generate XYZ tiles (Directory), and place them in `results/02Images/<CityName>/`.
 
-**Building footprints:** Place GeoJSON building polygons in `results/01City/<CityName>.geojson`.
+**Swiss surface 3D data:** Download the [swissSURFACE3D](https://www.swisstopo.admin.ch/en/height-model-swisssurface3d) dataset for your area of interest. This is used to filter the building polygons  to exclude steep rooftops from the prediction pipeline.
 
-**Swiss surface 3D data:** Download the [swissSURFACE3D](https://www.swisstopo.admin.ch/en/height-model-swisssurface3d) dataset for your area of interest. This is used during the slope filtering step to exclude steep rooftops from the prediction pipeline.
+**Building footprints:** Place GeoJSON building polygons (as stated in 1. Prerequisites) in `results/01City/<CityName>.geojson`.
 
 **Pretrained weights:** Place checkpoint files in the configured checkpoint directory (see `config/predict-config.toml`).
+
+**Pretrained models:** Please contact [Htet Yamin Ko Ko](htetyaminkokoedu@gmail.com) for the trained model and supplementary data.
 
 ### 3. Configuration
 
@@ -141,13 +143,13 @@ This project builds directly on the work of:
 - **Roofpedia** by [Abraham Noah Wu](https://ual.sg/authors/abraham/) and [Filip Biljecki](https://ual.sg/authors/filip/) at the [Urban Analytics Lab](https://ual.sg), National University of Singapore.
   - Wu AN, Biljecki F (2021): Roofpedia: Automatic mapping of green and solar roofs for an open roofscape registry and evaluation of urban sustainability. *Landscape and Urban Planning* 214: 104167. [doi:10.1016/j.landurbplan.2021.104167](https://doi.org/10.1016/j.landurbplan.2021.104167)
 
-- **swissSURFACE3D** by [swisstopo](https://www.swisstopo.admin.ch/) — the Swiss Federal Office of Topography.
+- **swissSURFACE3D** by [swisstopo](https://www.swisstopo.admin.ch/) — the Swiss Federal Office of Topography
+- **swissImage** by [swisstopo](https://www.swisstopo.admin.ch/) — the Swiss Federal Office of Topography.
 
 ### Packages
 
 - [PyTorch](https://pytorch.org/)
 - [GeoPandas](https://geopandas.org/)
-- [Robosat](https://github.com/mapbox/robosat) — slippy map tile loading adapted from Robosat
 
 ## License
 
