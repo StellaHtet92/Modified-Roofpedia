@@ -1,0 +1,13 @@
+# enter variables for easy prediction config
+city_name = "Bern"
+
+# for green roofs, change to "Green"
+target_type = "Green"
+
+
+# optional settings
+img_size = 256
+num_classes = 5
+checkpoint_path = "checkpoint"
+solar_checkpoint = "solar_demo.pth"
+green_checkpoint = "Green-final.pth"
