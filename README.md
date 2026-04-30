@@ -39,6 +39,11 @@ For CPU-only systems:
 ```
 conda env create -f environment_cpu.yml
 ```
+### Slope Filtering and Label Assignment
+
+Before prediction, run the slope computation and filtering process in QGIS to:
+- Filter out building polygons whose rooftops exceed a slope threshold (derived from swissSURFACE3D).
+- Save the results in Modified-Roofpedia/results/01City/CityName.geojson.
 
 ### 2. Data Preparation
 
@@ -68,20 +73,10 @@ green_checkpoint = "green_model.pth"
 Run the prediction script:
 
 ```
-python predict.py
+python predict_and_extract.py <CityName> Green
 ```
 
 Predicted masks will be saved to `results/03Masks/<target_type>/<CityName>/`.
-
-### 5. Slope Filtering and Label Assignment
-
-After prediction, run the slope filtering and labelling pipeline to:
-- Filter out building polygons whose rooftops exceed a slope threshold (derived from swissSURFACE3D).
-- Assign solar/green labels to the remaining building footprints based on mask overlap.
-
-```
-python label_buildings.py
-```
 
 Final labelled results are saved as GeoJSON in `results/04Results/`.
 
@@ -103,6 +98,7 @@ Modified-Roofpedia/
 │   ├── 03Masks/             # Predicted segmentation masks
 │   │   └── Green/
 │   └── 04Results/           # Final labelled building footprints
+        └── CityName.geojson
 ├── predict_and_extract.py               # Mask prediction + label assignment
 ├── train.py                 # Model training
 ├── dataset.py               # Train/val/test split utility
@@ -115,10 +111,10 @@ Modified-Roofpedia/
 To train your own model with custom labels, configure training options in `config/train-config.toml`, prepare your dataset with `dataset.py`, and run:
 
 ```
-python train.py
+python train.py <CityName> Green
 ```
 
-The U-Net architecture supports arbitrary rooftop classes — not limited to green roofs or solar panels.
+The U-Net architecture supports arbitrary rooftop classes, not limited to green roofs or solar panels.
 
 ## Methodology
 
@@ -126,10 +122,10 @@ The U-Net architecture supports arbitrary rooftop classes — not limited to gre
 Satellite Imagery (Zoom 19)
         │
         ▼
-  U-Net Prediction ──► Segmentation Masks
+swissSURFACE3D ──► Slope Computation ──► Roof Slope Filter (QGIS)
         │
         ▼
-  swissSURFACE3D ──► Slope Computation ──► Roof Slope Filter
+  U-Net Prediction ──► Segmentation Masks
         │
         ▼
   Building Polygons + Mask Overlay ──► Label Assignment
