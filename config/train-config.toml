@@ -1,0 +1,17 @@
+# config file for easy config settings
+# path to training and validation
+# original weights  [1.513212, 10.147043]
+dataset_path = "dataset"
+target_type = "Green"
+
+
+#model params
+tile_size = 256
+lr = 0.0005 
+loss_func = "Lovasz"
+num_epochs = 200
+target_size = 256
+batch_size  = 8
+weights = [0.06660202394031003, 1.649068049132022, 0.8240607221382403, 1.8162985008169406, 0.6439707039724872]
+checkpoint_path = "checkpoint"
+model_path = ''
