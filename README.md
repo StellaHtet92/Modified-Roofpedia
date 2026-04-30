@@ -21,7 +21,7 @@ The underlying model architecture (U-Net with 4 classes) and the slippy map tile
 |---|---|---|
 | Roof filtering | None | Slope filtering via swissSURFACE3D point cloud |
 | Label assignment | Binary (0 or 1) | Automated labelling method for building polygons based on the segmented areas |
-| Geographic focus | 8 global cities | Swiss cities |
+| Geographic focus | Global cities | Swiss cities |
 | 3D data integration | No | Yes (LiDAR-derived surface model) |
 
 ## Running Modified-Roofpedia
