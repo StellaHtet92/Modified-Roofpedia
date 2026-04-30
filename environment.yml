@@ -1,0 +1,16 @@
+name: roofpedia
+dependencies:
+  - python=3.8
+  - geopandas
+  - matplotlib
+  - pillow
+  - libwebp
+  - toml
+  - tqdm
+  - pytorch
+  - torchvision
+  - cudatoolkit=10.2
+  - pip:
+    - webp
+    - mercantile==1.0.4
+    - opencv-python

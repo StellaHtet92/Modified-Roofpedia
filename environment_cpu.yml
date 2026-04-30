@@ -1,0 +1,15 @@
+name: roofpedia-cpu
+dependencies:
+  - python=3.8
+  - geopandas
+  - matplotlib
+  - pillow
+  - libwebp
+  - toml
+  - tqdm
+  - pytorch
+  - torchvision
+  - pip:
+    - webp
+    - mercantile==1.0.4
+    - opencv-python
