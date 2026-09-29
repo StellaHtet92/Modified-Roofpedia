@@ -7,7 +7,7 @@ dependencies:
   - libwebp
   - toml
   - tqdm
-  - pytorch
+  - torch
   - torchvision
   - cudatoolkit=10.2
   - pip:

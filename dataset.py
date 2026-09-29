@@ -68,20 +68,20 @@ def convert_mask_multiclass(mask_list):
             for x in range(width):
                 r, g, b, a = pixels[x, y]
                 
-                # Determine class based on RGB values
-                if a == 0 or (r == 0 and g == 0 and b == 0 and a == 0):
+                # Determine class based on RGB values by putting the label tiles into qgis and checking the RGB values of the different classes
+                if r == 255 and g == 255 and b == 255 : #and a == 255
                     # Background (transparent or black with no alpha)
                     class_idx = 0
-                elif r == 0 and g == 0 and b == 0:
+                elif r == 86 and g == 184 and b == 129:
                     # Class 1
                     class_idx = 1
-                elif r == 85 and g == 85 and b == 85:
+                elif r == 241 and g == 240 and b == 117:
                     # Class 2
                     class_idx = 2
-                elif r == 170 and g == 170 and b == 170:
+                elif r == 229 and g == 94 and b == 94:
                     # Class 3
                     class_idx = 3
-                elif r == 255 and g == 255 and b == 255:
+                elif r == 64 and g == 64 and b == 64:
                     # Class 4
                     class_idx = 4
                 else:
@@ -90,8 +90,23 @@ def convert_mask_multiclass(mask_list):
                 
                 out_pixels[x, y] = class_idx
         
-        # Create palette: 5 colors (background + 4 classes)
-        palette = make_palette("light","green", "yellow","dark","red")  # Adjust if needed for 5 classes
+        # Create palette: 5 colors (background + 4 classes). Order MUST match the
+        # classifier above index-for-index (0=white/bg, 1=green, 2=yellow, 3=red,
+        # 4=dark) -- this used to be ("light","green","yellow","dark","red"), which
+        # swaps indices 3 and 4 relative to the classifier (index3 got "dark" instead
+        # of "red", index4 got "red" instead of "dark"). Harmless on a single run, but
+        # this function is destructive (out.save(i) overwrites the source file): if
+        # it's ever run a second time on an already-converted 'P'-mode file, .convert
+        # ('RGBA') looks up each pixel's color through the (mismatched) palette before
+        # reclassifying it, so class 3 and 4 pixels flip into each other on every
+        # extra run. Confirmed in practice: dataset/labels across three sibling
+        # projects (mapbox, RS Image, SwissImage) ended up with systematically
+        # swapped 3/4 (and, via a second, separate upstream inconsistency, 2/3)
+        # labels for what were verified to be the same physical roof polygons.
+        # With the palette corrected to match the classifier exactly, round-tripping
+        # is now idempotent for all 5 classes -- re-running this function on already-
+        # converted labels reproduces the same classification instead of scrambling it.
+        palette = make_palette("white", "green", "yellow", "red", "dark")
         out.putpalette(palette)
         
         out.save(i)
@@ -110,8 +125,8 @@ def train_test_split(file_list, train_size = 0.7):
 
 
 if __name__ == "__main__":
-    target_path = 'dataset/labels'
-    source_path = 'dataset/images'
+    target_path = 'D:/DeepLearning/Roofpedia_IEEE_Paper/Modified_Roofpedia_with_mapbox/dataset/labels'
+    source_path = 'D:/DeepLearning/Roofpedia_IEEE_Paper/Modified_Roofpedia_with_mapbox/dataset/images'
     files_target, files_source = load_img(target_path, source_path)
     remove_blank_tiles(files_target)
     print("reloading trimmed data")
@@ -123,7 +138,7 @@ if __name__ == "__main__":
     test_data_img =[]
     val_data_img =[]
     
-    output_folder = 'dataset'
+    output_folder = 'D:/DeepLearning/Roofpedia_IEEE_Paper/Modified_Roofpedia_with_mapbox/dataset'
     
     for i in train_data:
         if not os.path.exists(output_folder +'/training/labels/'):
