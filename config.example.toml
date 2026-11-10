@@ -1,0 +1,27 @@
+# Copy this file to config.toml and adapt the paths. config.toml is ignored by git.
+# Use forward slashes or single-quoted strings for Windows paths.
+
+[paths]
+work_dir          = 'D:/work/roofpedia'                       # data/, runs/ and eval/ are created here
+label_raster      = 'D:/data/four_class_label_0.1meter.tif'   # reference labels, codes 1 G, 2 PG, 3 S, 4 NS
+ndsm              = 'D:/data/nDSM.tif'                        # DSM - DTM, metres
+slope             = 'D:/data/slope.tif'                       # gdaldem slope dsm.tif slope.tif -alg Horn -compute_edges
+aspect            = 'D:/data/aspect.tif'                      # gdaldem aspect dsm.tif aspect.tif -alg Horn -zero_for_flat -compute_edges
+swissimage_tiles  = 'D:/data/tiles/swissimage/19'             # XYZ tiles, <x>/<y>.png
+mapbox_tiles      = 'D:/data/tiles/mapbox/19'                 # optional
+rs_geotiffs       = 'D:/data/SWISSIMAGE_RS'                   # optional, 4-band GeoTIFFs (band order NIR, R, G, B)
+footprints        = 'D:/data/buildings.shp'                   # swissTLM3D building footprints
+reference_table   = 'D:/data/buildings_with_labels.dbf'       # one row per footprint with the reference class
+
+[crs]
+footprints = 'EPSG:2056'
+rs         = 'EPSG:2056'
+
+[fields]
+id        = 'UUID'        # footprint identifier, shared by footprints and reference_table
+reference = 'reference'   # reference class per footprint (1-4, empty/0 = unlabelled)
+
+# Optional: rasters of existing pipelines for the binary green-roof comparison (codes: 1 = green roof).
+# [baselines]
+# roofpedia       = 'D:/data/Roofpedia_result.tif'
+# proj_vegroofs   = 'D:/data/proj-vegroofs_binary.tif'

@@ -1,0 +1,479 @@
+[
+ {
+  "name": "mapbox_image_only",
+  "imagery": "Mapbox satellite tiles (RGB)",
+  "fusion": false,
+  "in_channels": 3,
+  "band_order": [
+   "red",
+   "green",
+   "blue"
+  ],
+  "image_mean": [
+   0.485,
+   0.456,
+   0.406
+  ],
+  "image_std": [
+   0.229,
+   0.224,
+   0.225
+  ],
+  "image_scaling": "uint8 values divided by 255, then (x - mean) / std",
+  "struct_channels": [],
+  "struct_mean": [
+   4.653508913079567,
+   23.7269466599209,
+   9.931510167071306e-05,
+   -0.06466359479201418
+  ],
+  "struct_std": [
+   7.028989585091324,
+   26.60340433907024,
+   0.5349293855952284,
+   0.5078712236566156
+  ],
+  "flat_slope_deg": 6.5,
+  "classes": {
+   "0": "background",
+   "1": "Green",
+   "2": "Potential Green",
+   "3": "Solar",
+   "4": "Not Suitable"
+  },
+  "tile": {
+   "scheme": "XYZ slippy map (Web Mercator, EPSG:3857)",
+   "zoom": 19,
+   "size_px": 256,
+   "ground_pixel_m_at_bern": 0.204
+  },
+  "training": {
+   "region": "Bern, Switzerland",
+   "tiles_train_val_eval": [
+    6262,
+    1350,
+    1346
+   ],
+   "epochs": 200,
+   "selected_epoch": 144,
+   "loss": "Lovasz hinge (Roofpedia implementation)",
+   "optimizer": "Adam, lr 5e-4, batch 8",
+   "split": "spatially blocked, blocks of 8x8 tiles"
+  },
+  "heldout_metrics": {
+   "pixel_OA_roof": 0.591,
+   "pixel_mIoU_4class": 0.411,
+   "pixel_kappa": 0.678,
+   "pixel_IoU_G_PG_S_NS": [
+    0.535,
+    0.378,
+    0.315,
+    0.418
+   ],
+   "building_OA_area_rule": 0.651,
+   "building_kappa": 0.525,
+   "green_roof_F1_binary": 0.757
+  }
+ },
+ {
+  "name": "mapbox_fusion",
+  "imagery": "Mapbox satellite tiles (RGB)",
+  "fusion": true,
+  "in_channels": 3,
+  "band_order": [
+   "red",
+   "green",
+   "blue"
+  ],
+  "image_mean": [
+   0.485,
+   0.456,
+   0.406
+  ],
+  "image_std": [
+   0.229,
+   0.224,
+   0.225
+  ],
+  "image_scaling": "uint8 values divided by 255, then (x - mean) / std",
+  "struct_channels": [
+   "ndsm_m",
+   "slope_deg",
+   "sin_aspect",
+   "cos_aspect"
+  ],
+  "struct_mean": [
+   4.653508913079567,
+   23.7269466599209,
+   9.931510167071306e-05,
+   -0.06466359479201418
+  ],
+  "struct_std": [
+   7.028989585091324,
+   26.60340433907024,
+   0.5349293855952284,
+   0.5078712236566156
+  ],
+  "flat_slope_deg": 6.5,
+  "classes": {
+   "0": "background",
+   "1": "Green",
+   "2": "Potential Green",
+   "3": "Solar",
+   "4": "Not Suitable"
+  },
+  "tile": {
+   "scheme": "XYZ slippy map (Web Mercator, EPSG:3857)",
+   "zoom": 19,
+   "size_px": 256,
+   "ground_pixel_m_at_bern": 0.204
+  },
+  "training": {
+   "region": "Bern, Switzerland",
+   "tiles_train_val_eval": [
+    6262,
+    1350,
+    1346
+   ],
+   "epochs": 200,
+   "selected_epoch": 152,
+   "loss": "Lovasz hinge (Roofpedia implementation)",
+   "optimizer": "Adam, lr 5e-4, batch 8",
+   "split": "spatially blocked, blocks of 8x8 tiles"
+  },
+  "heldout_metrics": {
+   "pixel_OA_roof": 0.602,
+   "pixel_mIoU_4class": 0.426,
+   "pixel_kappa": 0.705,
+   "pixel_IoU_G_PG_S_NS": [
+    0.553,
+    0.387,
+    0.331,
+    0.435
+   ],
+   "building_OA_area_rule": 0.66,
+   "building_kappa": 0.536,
+   "green_roof_F1_binary": 0.774
+  }
+ },
+ {
+  "name": "swissimage_image_only",
+  "imagery": "SWISSIMAGE 10 cm (RGB, swisstopo, 2024)",
+  "fusion": false,
+  "in_channels": 3,
+  "band_order": [
+   "red",
+   "green",
+   "blue"
+  ],
+  "image_mean": [
+   0.485,
+   0.456,
+   0.406
+  ],
+  "image_std": [
+   0.229,
+   0.224,
+   0.225
+  ],
+  "image_scaling": "uint8 values divided by 255, then (x - mean) / std",
+  "struct_channels": [],
+  "struct_mean": [
+   4.653508913079567,
+   23.7269466599209,
+   9.931510167071306e-05,
+   -0.06466359479201418
+  ],
+  "struct_std": [
+   7.028989585091324,
+   26.60340433907024,
+   0.5349293855952284,
+   0.5078712236566156
+  ],
+  "flat_slope_deg": 6.5,
+  "classes": {
+   "0": "background",
+   "1": "Green",
+   "2": "Potential Green",
+   "3": "Solar",
+   "4": "Not Suitable"
+  },
+  "tile": {
+   "scheme": "XYZ slippy map (Web Mercator, EPSG:3857)",
+   "zoom": 19,
+   "size_px": 256,
+   "ground_pixel_m_at_bern": 0.204
+  },
+  "training": {
+   "region": "Bern, Switzerland",
+   "tiles_train_val_eval": [
+    6262,
+    1350,
+    1346
+   ],
+   "epochs": 200,
+   "selected_epoch": 116,
+   "loss": "Lovasz hinge (Roofpedia implementation)",
+   "optimizer": "Adam, lr 5e-4, batch 8",
+   "split": "spatially blocked, blocks of 8x8 tiles"
+  },
+  "heldout_metrics": {
+   "pixel_OA_roof": 0.593,
+   "pixel_mIoU_4class": 0.398,
+   "pixel_kappa": 0.67,
+   "pixel_IoU_G_PG_S_NS": [
+    0.537,
+    0.364,
+    0.292,
+    0.4
+   ],
+   "building_OA_area_rule": 0.659,
+   "building_kappa": 0.533,
+   "green_roof_F1_binary": 0.769
+  }
+ },
+ {
+  "name": "swissimage_fusion",
+  "imagery": "SWISSIMAGE 10 cm (RGB, swisstopo, 2024)",
+  "fusion": true,
+  "in_channels": 3,
+  "band_order": [
+   "red",
+   "green",
+   "blue"
+  ],
+  "image_mean": [
+   0.485,
+   0.456,
+   0.406
+  ],
+  "image_std": [
+   0.229,
+   0.224,
+   0.225
+  ],
+  "image_scaling": "uint8 values divided by 255, then (x - mean) / std",
+  "struct_channels": [
+   "ndsm_m",
+   "slope_deg",
+   "sin_aspect",
+   "cos_aspect"
+  ],
+  "struct_mean": [
+   4.653508913079567,
+   23.7269466599209,
+   9.931510167071306e-05,
+   -0.06466359479201418
+  ],
+  "struct_std": [
+   7.028989585091324,
+   26.60340433907024,
+   0.5349293855952284,
+   0.5078712236566156
+  ],
+  "flat_slope_deg": 6.5,
+  "classes": {
+   "0": "background",
+   "1": "Green",
+   "2": "Potential Green",
+   "3": "Solar",
+   "4": "Not Suitable"
+  },
+  "tile": {
+   "scheme": "XYZ slippy map (Web Mercator, EPSG:3857)",
+   "zoom": 19,
+   "size_px": 256,
+   "ground_pixel_m_at_bern": 0.204
+  },
+  "training": {
+   "region": "Bern, Switzerland",
+   "tiles_train_val_eval": [
+    6262,
+    1350,
+    1346
+   ],
+   "epochs": 200,
+   "selected_epoch": 132,
+   "loss": "Lovasz hinge (Roofpedia implementation)",
+   "optimizer": "Adam, lr 5e-4, batch 8",
+   "split": "spatially blocked, blocks of 8x8 tiles"
+  },
+  "heldout_metrics": {
+   "pixel_OA_roof": 0.601,
+   "pixel_mIoU_4class": 0.426,
+   "pixel_kappa": 0.708,
+   "pixel_IoU_G_PG_S_NS": [
+    0.567,
+    0.377,
+    0.292,
+    0.468
+   ],
+   "building_OA_area_rule": 0.65,
+   "building_kappa": 0.529,
+   "green_roof_F1_binary": 0.783
+  }
+ },
+ {
+  "name": "rs_image_only",
+  "imagery": "SWISSIMAGE RS (R, G, B, near-infrared; STDL subset for Bern)",
+  "fusion": false,
+  "in_channels": 4,
+  "band_order": [
+   "red",
+   "green",
+   "blue",
+   "near_infrared"
+  ],
+  "image_mean": [
+   0.485,
+   0.456,
+   0.406,
+   0.35942022772154897
+  ],
+  "image_std": [
+   0.229,
+   0.224,
+   0.225,
+   0.18876421098875584
+  ],
+  "image_scaling": "uint8 values divided by 255, then (x - mean) / std",
+  "struct_channels": [],
+  "struct_mean": [
+   4.653508913079567,
+   23.7269466599209,
+   9.931510167071306e-05,
+   -0.06466359479201418
+  ],
+  "struct_std": [
+   7.028989585091324,
+   26.60340433907024,
+   0.5349293855952284,
+   0.5078712236566156
+  ],
+  "flat_slope_deg": 6.5,
+  "classes": {
+   "0": "background",
+   "1": "Green",
+   "2": "Potential Green",
+   "3": "Solar",
+   "4": "Not Suitable"
+  },
+  "tile": {
+   "scheme": "XYZ slippy map (Web Mercator, EPSG:3857)",
+   "zoom": 19,
+   "size_px": 256,
+   "ground_pixel_m_at_bern": 0.204
+  },
+  "training": {
+   "region": "Bern, Switzerland",
+   "tiles_train_val_eval": [
+    6262,
+    1350,
+    1346
+   ],
+   "epochs": 200,
+   "selected_epoch": 131,
+   "loss": "Lovasz hinge (Roofpedia implementation)",
+   "optimizer": "Adam, lr 5e-4, batch 8",
+   "split": "spatially blocked, blocks of 8x8 tiles"
+  },
+  "heldout_metrics": {
+   "pixel_OA_roof": 0.59,
+   "pixel_mIoU_4class": 0.419,
+   "pixel_kappa": 0.689,
+   "pixel_IoU_G_PG_S_NS": [
+    0.542,
+    0.369,
+    0.312,
+    0.452
+   ],
+   "building_OA_area_rule": 0.657,
+   "building_kappa": 0.532,
+   "green_roof_F1_binary": 0.783
+  }
+ },
+ {
+  "name": "rs_fusion",
+  "imagery": "SWISSIMAGE RS (R, G, B, near-infrared; STDL subset for Bern)",
+  "fusion": true,
+  "in_channels": 4,
+  "band_order": [
+   "red",
+   "green",
+   "blue",
+   "near_infrared"
+  ],
+  "image_mean": [
+   0.485,
+   0.456,
+   0.406,
+   0.35942022772154897
+  ],
+  "image_std": [
+   0.229,
+   0.224,
+   0.225,
+   0.18876421098875584
+  ],
+  "image_scaling": "uint8 values divided by 255, then (x - mean) / std",
+  "struct_channels": [
+   "ndsm_m",
+   "slope_deg",
+   "sin_aspect",
+   "cos_aspect"
+  ],
+  "struct_mean": [
+   4.653508913079567,
+   23.7269466599209,
+   9.931510167071306e-05,
+   -0.06466359479201418
+  ],
+  "struct_std": [
+   7.028989585091324,
+   26.60340433907024,
+   0.5349293855952284,
+   0.5078712236566156
+  ],
+  "flat_slope_deg": 6.5,
+  "classes": {
+   "0": "background",
+   "1": "Green",
+   "2": "Potential Green",
+   "3": "Solar",
+   "4": "Not Suitable"
+  },
+  "tile": {
+   "scheme": "XYZ slippy map (Web Mercator, EPSG:3857)",
+   "zoom": 19,
+   "size_px": 256,
+   "ground_pixel_m_at_bern": 0.204
+  },
+  "training": {
+   "region": "Bern, Switzerland",
+   "tiles_train_val_eval": [
+    6262,
+    1350,
+    1346
+   ],
+   "epochs": 200,
+   "selected_epoch": 113,
+   "loss": "Lovasz hinge (Roofpedia implementation)",
+   "optimizer": "Adam, lr 5e-4, batch 8",
+   "split": "spatially blocked, blocks of 8x8 tiles"
+  },
+  "heldout_metrics": {
+   "pixel_OA_roof": 0.603,
+   "pixel_mIoU_4class": 0.421,
+   "pixel_kappa": 0.71,
+   "pixel_IoU_G_PG_S_NS": [
+    0.562,
+    0.374,
+    0.302,
+    0.446
+   ],
+   "building_OA_area_rule": 0.675,
+   "building_kappa": 0.555,
+   "green_roof_F1_binary": 0.79
+  }
+ }
+]

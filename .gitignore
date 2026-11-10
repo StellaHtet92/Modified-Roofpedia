@@ -1,0 +1,45 @@
+# local configuration (contains your paths)
+config.toml
+
+# pipeline outputs and data (kept outside the repository; see config.example.toml)
+data/
+runs/
+eval/
+colored/
+previews/
+
+# model weights are distributed as GitHub release assets, not in git
+*.pth
+*.pt
+*.ckpt
+
+# rasters, arrays and archives
+*.tif
+*.tiff
+*.ovr
+*.npy
+*.npz
+*.zip
+!sample/**/*.npy
+
+# vector data
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.sbn
+*.sbx
+*.gpkg
+
+# secrets
+.env
+*.key
+*token*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
