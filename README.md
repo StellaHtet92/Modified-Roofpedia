@@ -34,7 +34,7 @@ Modified-Roofpedia extends the Roofpedia segmentation workflow in four ways.
 
 ## Model architecture
 
-![Fusion network architecture](docs/fusion_unet_architecture.png)
+![Fusion network architecture](fusion_unet_architecture.png)
 <!-- TODO: add the figure to docs/ or update this path -->
 
 - **Image encoder:** ResNet-50 pretrained on ImageNet. For four-band input (RGB + NIR), the first convolution is widened and the NIR filters are initialized with the mean of the pretrained RGB filters.
