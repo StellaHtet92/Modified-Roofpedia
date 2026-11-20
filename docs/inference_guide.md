@@ -145,7 +145,7 @@ We strongly recommend fine-tuning with a few hundred labelled buildings from you
 - **Splits:** keep validation and test areas spatially separate from the training areas.
 - **Normalization:** use the constants in `meta` (`image_mean`, `image_std`, `struct_mean`, `struct_std`) unchanged when fine-tuning.
 
-[[AUTHOR: add a link to the training code repository if you make it public.]]
+The full training pipeline, including the tiling, the spatially blocked split and the evaluation scripts, is in `pipeline/` in this repository; see [reproducing.md](reproducing.md).
 
 ## 7. Known limitations
 
@@ -157,7 +157,7 @@ We strongly recommend fine-tuning with a few hundred labelled buildings from you
 
 ## 8. Terms of use
 
-[[AUTHOR: state the conditions for academic use here, e.g., a licence (CC BY 4.0 / CC BY-NC 4.0) and the citation requirement.]]
+The trained weights and this guide are released under CC BY 4.0 (`LICENSE-DATA`); the code that loads and runs them is released under the MIT licence (`LICENSE`). Academic and commercial use are both permitted, provided you cite the paper named in the repository README and retain the third-party notices in `THIRD_PARTY_NOTICES.md`. The models are provided as is, without warranty; read the "Known limitations" section above before relying on their output.
 
 Data used for training:
 - **SWISSIMAGE, swissSURFACE3D, swissALTI3D and swissTLM3D** © swisstopo (open government data).
